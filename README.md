@@ -3,7 +3,7 @@
 > **Adapted by Ivan Svarkovsky, 2026**  
 > Based on Espressif's official [esp-iot-solution/examples/usb/device/usb_dongle](https://github.com/espressif/esp-iot-solution)
 
-A fully autonomous USB Wi-Fi dongle solution for ESP32-S2/S3/(P4?).  
+A fully autonomous USB Wi-Fi dongle solution for ESP32-S2/S3.  
 **Zero console configuration required.** Just plug in, wait 4 seconds, and configure via the ESP-Touch mobile app. Credentials are saved to FLASH and auto-restored on next boot.
 
 ## ✨ Key Modifications
@@ -23,7 +23,8 @@ A fully autonomous USB Wi-Fi dongle solution for ESP32-S2/S3/(P4?).
 | **Blue** | `0, 0, 20` | Waiting for ESP-Touch configuration (SmartConfig active) |
 
 ## 🛠 Hardware Requirements
-- **MCU:** ESP32-S2, ESP32-S3, or (ESP32-P4 ?) board with USB-OTG support
+- **MCU:** ESP32-S2 or ESP32-S3 board with USB-OTG support  
+  *Note: ESP32-P4 requires external Wi-Fi module (not supported in this project)*
 - **LED (Optional):** Addressable RGB LED (WS2812/SK6812) for status indication.
   - *Default Pin:* **GPIO48** (ESP32-S3 DevKitC/UNO), **GPIO18** (ESP32-S2 Saola).
   - *Note:* If your board uses a different pin or has no LED, the firmware will automatically detect this, log a warning, and continue working normally without visual indication. No code changes required.
