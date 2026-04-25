@@ -54,22 +54,47 @@ idf.py build flash
 
 ## 🚀 Quick Start Guide
 
-1. **Plug in** the dongle to your PC via USB. The OS will detect a new Ethernet adapter (`usb0` / `ECM` / `RNDIS`).
-2. **Wait ~4 seconds.** If no saved Wi-Fi is available, the LED will turn **Blue**.
-3. **Open ESP-Touch app** on your smartphone. Ensure your phone is connected to the target **2.4GHz Wi-Fi network**.
-4. **Enter the Wi-Fi password** and tap **Confirm**. The app broadcasts credentials via UDP.
-5. **Once received**, the dongle connects, saves credentials to FLASH, and the LED turns **Green**.
-6. **Next boots:** The device will automatically reconnect to the saved network. If the network is unavailable, it falls back to Blue/SmartConfig mode again.
+### ⚠️ Important Hardware Note
+**USB Port Conflict:** On most ESP32-S2/S3 development boards, the same USB connector is used for both **UART debugging/flashing** and **USB-OTG (Network)**.  
+- **During Flashing:** Connect via USB for UART.  
+- **During Operation:** You must **disconnect the UART cable** (or switch to a dedicated UART adapter if available) and ensure the PC connects to the device purely as a **USB Network Device**. If you keep the UART console active, the USB Ethernet adapter may not enumerate correctly or will have conflicts.
 
-## 📖 Original Features Retained
+### Step-by-Step Setup
 
-- USB ECM/RNDIS network class (Linux/Windows/macOS compatible)
-- USB-CDC console for debugging & CLI commands
-- USB-DFU firmware upgrade support
-- Hot-swap & plug-and-play USB enumeration
+1. **Flash the Firmware**  
+   Connect the board via USB and flash using `idf.py flash`. Wait for the process to complete.
 
-## 📜 License
-This project is licensed under the **Apache License 2.0**.  
-Original copyright belongs to Espressif Systems. Modifications and enhancements are attributed to Ivan Svarkovsky, 2026.
+2. **Switch to USB-OTG Mode**  
+   - If your board has a physical switch for "UART/USB", toggle it to **USB**.  
+   - If not, simply **unplug and replug** the USB cable after flashing to reset the USB enumeration state.  
+   - Your PC should now detect a new **Ethernet Adapter** (`usb0` on Linux, `RNDIS/Ethernet Gadget` on Windows).
+
+3. **Wait for SmartConfig Fallback**  
+   Plug in the dongle. Wait ~4 seconds.  
+   - If no saved Wi-Fi is found, the LED will turn **Blue** 🔵.  
+   - This indicates the device is ready to receive credentials via ESP-Touch.
+
+4. **Configure via ESP-Touch App**  
+   - Open the [ESP-Touch app](https://github.com/EspressifApp/EsptouchForAndroid) on your smartphone.  
+   - Ensure your phone is connected to the target **2.4GHz Wi-Fi network**.  
+   - Enter the Wi-Fi password and tap **Confirm**.  
+   - The app broadcasts credentials via UDP. The dongle will receive them, connect, save to FLASH, and the LED will turn **Green** 🟢.
+
+5. **Automatic Reconnection**  
+   On subsequent power-ups, the device will automatically reconnect to the saved network. If the network is unavailable, it will fall back to **Blue/SmartConfig** mode again.
+
+---
+
+### 📖 Original Features & Advanced Configuration
+This project is based on Espressif's official [esp-iot-solution/examples/usb/device/usb_dongle](https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/device/usb_dongle).  
+For details on:
+- Enabling Bluetooth over USB (BTH)
+- Using DFU for firmware upgrades
+- Advanced TinyUSB configuration (ECM/RNDIS/CDC combinations)
+- Troubleshooting driver issues on Windows/macOS/Linux
+
+Please refer to the **original documentation** linked above. Our modification focuses on **autonomous Wi-Fi setup** and **LED status indication**, keeping the core USB stack intact.
+
+
 
 
