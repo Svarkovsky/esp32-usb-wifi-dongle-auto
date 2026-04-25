@@ -36,11 +36,20 @@ A fully autonomous USB Wi-Fi dongle solution for ESP32-S2/S3/P4.
 Requires **ESP-IDF v5.4+**. The `led_strip` dependency is automatically managed via `idf_component.yml`.
 
 ```bash
-# 1. Set target (esp32s2 / esp32s3 / esp32p4)
+# 1. Clean project artifacts
+idf.py fullclean
+
+# 2. Add LED dependency
+idf.py add-dependency "espressif/led_strip^2.0.0"
+
+# 3. Erase flash memory (clears old Wi-Fi passwords)
+esptool.py --chip esp32s3 --port /dev/ttyUSB0 erase_flash
+
+# 4. Set target chip (esp32s2 / esp32s3 / esp32p4)
 idf.py set-target esp32s3
 
-# 2. Build & Flash
-idf.py build flash monitor
+# 5. Build and Flash
+idf.py build flash
 ```
 
 ## 🚀 Quick Start Guide
