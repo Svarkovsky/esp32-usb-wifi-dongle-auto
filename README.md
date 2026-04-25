@@ -18,9 +18,9 @@ A fully autonomous USB Wi-Fi dongle solution for ESP32-S2/S3/P4.
 ##  LED Indication Guide
 | Color | State | Meaning |
 |-------|-------|---------|
-| 🔴 **Red** | `20, 0, 0` | Initializing / Disconnected / Connection Error |
-|  **Green** | `0, 20, 0` | Successfully connected to Wi-Fi & Internet ready |
-| 🔵 **Blue** | `0, 0, 20` | Waiting for ESP-Touch configuration (SmartConfig active) |
+| **Red** | `20, 0, 0` | Initializing / Disconnected / Connection Error |
+| **Green** | `0, 20, 0` | Successfully connected to Wi-Fi & Internet ready |
+| **Blue** | `0, 0, 20` | Waiting for ESP-Touch configuration (SmartConfig active) |
 
 ## 🛠 Hardware Requirements
 - **MCU:** ESP32-S2, ESP32-S3, or ESP32-P4 board with USB-OTG support
