@@ -46,7 +46,7 @@ idf.py add-dependency "espressif/led_strip^2.0.0"
 # 3. Erase flash memory (clears old Wi-Fi passwords)
 esptool.py --chip esp32s3 --port /dev/ttyUSB0 erase_flash
 
-# 4. Set target chip (esp32s2 / esp32s3 / esp32p4)
+# 4. Set target chip (esp32s2 / esp32s3)
 idf.py set-target esp32s3
 
 # 5. Build and Flash
